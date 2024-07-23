@@ -1,22 +1,8 @@
 /*
 EXTRA
-1. Partendo da una stringa (passata come parametro), ritorna il carattere più usato nella stringa stessa.
 
-2. Controlla che due stringhe passate come parametri siano gli anagrammi l’una dell’altra. Ignora punteggiatura e spazi e ricordate di rendere la stringa tutta in minuscolo. Se le due parole sono anagrammi, ritorna `true`, altrimenti ritorna `false`. 
 
-3. Partendo da una lista di possibili anagrammi e da una parola (entrambi passati come parametri), ritorna un nuovo array contenente tutti gli anagrammi corretti della parola data. 
 
-Per esempio, partendo da “cartine” e [”carenti”, “incerta”, “espatrio”], il valore ritornato deve essere [”carenti”, “incerta”].
-
-4. Partendo da una stringa passata come parametro, ritorna `true` se la stringa è palindroma o `false` se non lo è. 
-
-5. Partendo da un numero intero (dai parametri) ritorna un numero che contenga le stesse cifre, ma in ordine contrario. Es. 189 ⇒ 981
-
-6. Scrivi una funzione che accetti un numero positivo X come parametro. La funzione dovrebbe stampare a console una “scala” creata con il carattere “#” e avente X scalini. 
-
-7. Crea una funzione che, data una stringa come parametro, ritorni la stessa stringa, ma al contrario. Es. “Ciao” ****⇒ “oaiC”
-
-8. Crea una funzione che accetti un array e un numero Y come parametro. Dividi l’array in sotto-array aventi lunghezza Y. 
 
 9. Scrivi una funzione che accetti un numero positivo X come parametro. La funzione dovrebbe stampare a console una “piramide” create con il carattere “#” e avente X strati.
 
@@ -104,3 +90,102 @@ const exercise8 = (stringInput) => {
 }
 
 console.log(exercise8("questa è Sparta"))
+
+
+
+// EXTRA
+
+/* 1. Partendo da una stringa (passata come parametro), ritorna il carattere più usato nella stringa stessa. */
+const extra1 = (string) => {
+    const counts = {};
+    string.replaceAll(" ", "").split("").forEach(character => {
+        counts[character] ? counts[character]++ : counts[character] = 1;
+    });
+
+    let maxCharacter = "";
+    let maxCount = 0;
+
+    for (let character in counts) {
+        if (counts[character] > maxCount) {
+            maxCharacter = character;
+            maxCount = counts[character];
+        }
+    }
+
+    return maxCharacter
+}
+
+console.log(extra1("javascript è molto divertente"))
+
+
+/* 2. Controlla che due stringhe passate come parametri siano gli anagrammi l’una dell’altra. Ignora punteggiatura e spazi e ricordate di rendere la stringa tutta in minuscolo. Se le due parole sono anagrammi, ritorna `true`, altrimenti ritorna `false`.  */
+const cleanString = (string) => {
+    return string.replace(/[^\w]/g, '').toLowerCase().split("").sort().join("");
+}
+
+const extra2 = (string1, string2) => {
+    const string1Cleaned = cleanString(string1);
+    const string2Cleaned = cleanString(string2);
+    return string1Cleaned === string2Cleaned;
+}
+
+console.log(extra2("Listen!", "Silent."))
+
+
+/* 3. Partendo da una lista di possibili anagrammi e da una parola (entrambi passati come parametri), ritorna un nuovo array contenente tutti gli anagrammi corretti della parola data. 
+Per esempio, partendo da “cartine” e [”carenti”, “incerta”, “espatrio”], il valore ritornato deve essere [”carenti”, “incerta”]. */
+const extra3 = (string, stringArray) => {
+    const stringCleaned = cleanString(string);
+    let results = [];
+
+    stringArray.forEach(string => {
+        if(cleanString(string) === stringCleaned) {
+            results.push(string);
+        }
+    })
+
+    return results;
+}
+
+console.log(extra3("cartine", ["carenti", "incerta", "espatrio"]))
+
+
+/* 4. Partendo da una stringa passata come parametro, ritorna `true` se la stringa è palindroma o `false` se non lo è.  */
+const extra4 = (string) => {
+    return string.toLowerCase() === string.toLowerCase().split("").reverse().join("");
+}
+
+console.log(extra4("radar"))
+
+
+/* 5. Partendo da un numero intero (dai parametri) ritorna un numero che contenga le stesse cifre, ma in ordine contrario. Es. 189 ⇒ 981 */
+const extra5 = (number) => {
+    return parseFloat(number.toString().split("").reverse().join(""))
+}
+
+console.log(extra5(189))
+
+
+/* 6. Scrivi una funzione che accetti un numero positivo X come parametro. La funzione dovrebbe stampare a console una “scala” creata con il carattere “#” e avente X scalini.  */
+const extra6 = (x) => {
+    if (x >= 1) {
+        for (let i = 1; i <= x; i++) {
+            console.log("#".repeat(i));
+        }
+    } else {
+        console.log("Inserisci un numero positivo diverso da 0.")
+    }
+}
+
+extra6(5)
+
+
+/* 7. Crea una funzione che, data una stringa come parametro, ritorni la stessa stringa, ma al contrario. Es. “Ciao” ****⇒ “oaiC” */
+const extra7 = (string) => {
+    return string.split("").reverse().join("");
+}
+
+console.log(extra7("Ciao"))
+
+
+/* 8. Crea una funzione che accetti un array e un numero Y come parametro. Dividi l’array in sotto-array aventi lunghezza Y. */

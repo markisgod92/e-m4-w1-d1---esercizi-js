@@ -1,14 +1,3 @@
-/*
-EXTRA
-
-
-
-
-9. Scrivi una funzione che accetti un numero positivo X come parametro. La funzione dovrebbe stampare a console una “piramide” create con il carattere “#” e avente X strati.
-
-10. Scrivi una funzione che accetti un intero N e ritorni una matrice a spirale NxN:
-*/
-
 /* 1) funzione che controlli due numeri interi. Ritorna true se uno dei due è 50 o se la somma dei due è 50. */
 const exercise1 = (a, b) => {
     return a + b === 50 || a === 50 || b === 50;
@@ -189,3 +178,30 @@ console.log(extra7("Ciao"))
 
 
 /* 8. Crea una funzione che accetti un array e un numero Y come parametro. Dividi l’array in sotto-array aventi lunghezza Y. */
+const extra8 = (array, Y) => {
+    const outputArray = []
+    for (let i = 0; i < array.length; i += Y) {
+        outputArray.push(array.slice(i, i+Y))
+    }
+    return outputArray
+}
+
+console.log(extra8([1, 2, 3, 4, 5, 6, 7, 8, 9], 3))
+
+
+/* 9. Scrivi una funzione che accetti un numero positivo X come parametro. 
+La funzione dovrebbe stampare a console una “piramide” create con il carattere “#” e avente X strati. */
+const extra9 = (x) => {
+    let spaces;
+    let hash;
+    for (let i = 1; i <= x; i++) {
+        spaces = ` `.repeat(x - i)
+        hash = `#`.repeat(2 * i -1)
+        console.log(spaces + hash + spaces)
+    }  
+}
+
+extra9(5)
+
+
+/* 10. Scrivi una funzione che accetti un intero N e ritorni una matrice a spirale NxN: */
